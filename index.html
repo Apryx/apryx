@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Syntax</title>
+  </head>
+  <body>
+    <pre style='color:#000000;background:#ffffff;'><span style='color:#696969; '>//==============================================================================//</span>
+<span style='color:#696969; '>// Basic features</span>
+<span style='color:#696969; '>//==============================================================================//</span>
+<span style='color:#800000; font-weight:bold; '>class</span> Person<span style='color:#800080; '>{</span>
+  var name <span style='color:#800080; '>:</span> <span style='color:#603000; '>String</span>
+  var age <span style='color:#800080; '>:</span> <span style='color:#800000; font-weight:bold; '>int</span>
+
+  function toString<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span> <span style='color:#800080; '>:</span> <span style='color:#603000; '>String</span><span style='color:#800080; '>{</span>
+    <span style='color:#800000; font-weight:bold; '>return</span> name <span style='color:#808030; '>+</span> <span style='color:#800000; '>"</span><span style='color:#0000e6; '> is </span><span style='color:#800000; '>"</span> <span style='color:#808030; '>+</span> age <span style='color:#808030; '>+</span> <span style='color:#800000; '>"</span><span style='color:#0000e6; '> years old!</span><span style='color:#800000; '>"</span>
+  <span style='color:#800080; '>}</span>
+<span style='color:#800080; '>}</span>
+
+<span style='color:#696969; '>//Three different options, first is null, last two are initialized</span>
+var p <span style='color:#800080; '>:</span> Person
+var p <span style='color:#800080; '>:</span> Person <span style='color:#808030; '>=</span> Person<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+var p <span style='color:#808030; '>=</span> Person<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+
+<span style='color:#696969; '>//Now p has a value</span>
+p <span style='color:#808030; '>=</span> Person<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+
+p<span style='color:#808030; '>.</span>name <span style='color:#808030; '>=</span> <span style='color:#800000; '>"</span><span style='color:#0000e6; '>Harry Potter</span><span style='color:#800000; '>"</span>
+p<span style='color:#808030; '>.</span>age <span style='color:#808030; '>=</span> <span style='color:#008c00; '>42</span>
+
+print<span style='color:#808030; '>(</span>p<span style='color:#808030; '>)</span>  <span style='color:#696969; '>//Prints "Harry potter is 42 years old!"</span>
+
+<span style='color:#696969; '>//==============================================================================//</span>
+<span style='color:#696969; '>// Coroutines</span>
+<span style='color:#696969; '>//==============================================================================//</span>
+
+<span style='color:#800000; font-weight:bold; '>class</span> EventHandler<span style='color:#800080; '>{</span>
+
+  function onClick<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
+    print<span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#0000e6; '>Ayy lmao!</span><span style='color:#800000; '>"</span><span style='color:#808030; '>)</span>
+  <span style='color:#800080; '>}</span>
+
+  coroutine handle<span style='color:#808030; '>(</span>e <span style='color:#800080; '>:</span> Event<span style='color:#808030; '>)</span> <span style='color:#800080; '>:</span> <span style='color:#800000; font-weight:bold; '>bool</span><span style='color:#800080; '>{</span>
+    <span style='color:#800000; font-weight:bold; '>if</span><span style='color:#808030; '>(</span>e<span style='color:#808030; '>.</span>isMouseDown<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
+      yield <span style='color:#800000; font-weight:bold; '>true</span><span style='color:#800080; '>;</span>
+
+      <span style='color:#800000; font-weight:bold; '>while</span><span style='color:#808030; '>(</span><span style='color:#808030; '>!</span>e<span style='color:#808030; '>.</span>isMouseUp<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
+        yield <span style='color:#800000; font-weight:bold; '>false</span><span style='color:#800080; '>;</span>
+      <span style='color:#800080; '>}</span>
+
+      onClick<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+      <span style='color:#800000; font-weight:bold; '>return</span> <span style='color:#800000; font-weight:bold; '>true</span><span style='color:#800080; '>;</span>
+    <span style='color:#800080; '>}</span>
+    <span style='color:#800000; font-weight:bold; '>else</span><span style='color:#800080; '>{</span>
+      <span style='color:#800000; font-weight:bold; '>return</span> <span style='color:#800000; font-weight:bold; '>false</span><span style='color:#800080; '>;</span>
+    <span style='color:#800080; '>}</span>
+  <span style='color:#800080; '>}</span>
+
+<span style='color:#800080; '>}</span>
+
+var eventHandlers <span style='color:#800080; '>:</span> EventHandler<span style='color:#808030; '>[</span><span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> getHandlers<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+var event <span style='color:#800080; '>:</span> Event <span style='color:#808030; '>=</span> getEvent<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+
+<span style='color:#800000; font-weight:bold; '>while</span><span style='color:#808030; '>(</span>e in eventHandlers<span style='color:#808030; '>)</span>
+  <span style='color:#800000; font-weight:bold; '>if</span><span style='color:#808030; '>(</span>e<span style='color:#808030; '>.</span>handle<span style='color:#808030; '>(</span>event<span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
+    <span style='color:#800000; font-weight:bold; '>break</span><span style='color:#800080; '>;</span>
+
+<span style='color:#696969; '>//==============================================================================//</span>
+<span style='color:#696969; '>// Annotations</span>
+<span style='color:#696969; '>//==============================================================================//</span>
+
+<span style='color:#696969; '>//NOTE really not sure how this should work, if at all like this</span>
+<span style='color:#696969; '>//                            function&lt;void>     ?</span>
+function RequireLogin<span style='color:#808030; '>(</span>fwd <span style='color:#800080; '>:</span> <span style='color:#808030; '>(</span>function<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span> <span style='color:#800080; '>:</span> <span style='color:#800000; font-weight:bold; '>void</span><span style='color:#808030; '>)</span> <span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
+  <span style='color:#800000; font-weight:bold; '>if</span><span style='color:#808030; '>(</span>loggedIn<span style='color:#808030; '>)</span>
+    fwd<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+<span style='color:#800080; '>}</span>
+
+<span style='color:#808030; '>@</span>RequireLogin
+function getName<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
+
+<span style='color:#800080; '>}</span>
+
+<span style='color:#696969; '>//==============================================================================//</span>
+<span style='color:#696969; '>// Templates</span>
+<span style='color:#696969; '>//==============================================================================//</span>
+
+<span style='color:#800000; font-weight:bold; '>class</span> A<span style='color:#800080; '>&lt;</span>T<span style='color:#800080; '>></span> <span style='color:#800080; '>{</span>
+  T value
+<span style='color:#800080; '>}</span>
+
+var a <span style='color:#800080; '>:</span> A<span style='color:#800080; '>&lt;</span><span style='color:#800000; font-weight:bold; '>int</span><span style='color:#800080; '>></span> <span style='color:#808030; '>=</span> A<span style='color:#800080; '>&lt;</span><span style='color:#800000; font-weight:bold; '>int</span><span style='color:#800080; '>></span><span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+a<span style='color:#808030; '>.</span>value <span style='color:#808030; '>=</span> <span style='color:#008c00; '>2</span><span style='color:#800080; '>;</span>
+
+function getComponent<span style='color:#800080; '>&lt;</span>T<span style='color:#800080; '>></span><span style='color:#808030; '>(</span><span style='color:#808030; '>)</span> <span style='color:#800080; '>:</span> T<span style='color:#800080; '>{</span>
+  <span style='color:#800000; font-weight:bold; '>return</span> cmp<span style='color:#808030; '>.</span>get<span style='color:#808030; '>(</span>T<span style='color:#808030; '>.</span>getClass<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
+<span style='color:#800080; '>}</span>
+
+<span style='color:#696969; '>//==============================================================================//</span>
+<span style='color:#696969; '>// Automatic enforcers and other stuff</span>
+<span style='color:#696969; '>//==============================================================================//</span>
+<span style='color:#696969; '>// NOTE not sure how this should be done yet</span>
+
+function doStuff<span style='color:#808030; '>(</span>a <span style='color:#800080; '>:</span> notnull ClassType<span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
+
+<span style='color:#800080; '>}</span>
+
+<span style='color:#696969; '>//==============================================================================//</span>
+<span style='color:#696969; '>// Out parameters</span>
+<span style='color:#696969; '>//==============================================================================//</span>
+
+function raycast<span style='color:#808030; '>(</span>ray <span style='color:#800080; '>:</span> Ray<span style='color:#808030; '>,</span> hitInfo <span style='color:#800080; '>:</span> out HitInfo<span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
+  hitInfo <span style='color:#808030; '>=</span> HitInfo<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+  <span style='color:#696969; '>//Do stuff</span>
+<span style='color:#800080; '>}</span>
+
+var hitInfo <span style='color:#800080; '>:</span> HitInfo
+raycast<span style='color:#808030; '>(</span>ray<span style='color:#808030; '>,</span> hitInfo<span style='color:#808030; '>)</span>
+
+<span style='color:#696969; '>//Now hitInfo has a value</span>
+
+<span style='color:#696969; '>//==============================================================================//</span>
+<span style='color:#696969; '>// Multiple return types</span>
+<span style='color:#696969; '>//==============================================================================//</span>
+
+<span style='color:#696969; '>//See Symmetry</span>
+symetric function intersects<span style='color:#808030; '>(</span>line <span style='color:#800080; '>:</span> Line<span style='color:#808030; '>,</span> plane <span style='color:#800080; '>:</span> Plane<span style='color:#808030; '>)</span> <span style='color:#800080; '>:</span> <span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>bool</span><span style='color:#808030; '>,</span> Vector3<span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
+  <span style='color:#696969; '>//Do your calculations</span>
+  <span style='color:#800000; font-weight:bold; '>return</span> <span style='color:#800000; font-weight:bold; '>true</span><span style='color:#808030; '>,</span> point
+<span style='color:#800080; '>}</span>
+
+<span style='color:#696969; '>//Explicit typing</span>
+var intersection <span style='color:#800080; '>:</span> <span style='color:#800000; font-weight:bold; '>bool</span><span style='color:#808030; '>,</span> point <span style='color:#800080; '>:</span> Vector3 <span style='color:#808030; '>=</span> intersects<span style='color:#808030; '>(</span>line<span style='color:#808030; '>,</span> plane<span style='color:#808030; '>)</span>
+
+<span style='color:#696969; '>//Implicit typing, preffered</span>
+var intersection<span style='color:#808030; '>,</span> point <span style='color:#808030; '>=</span> intersects<span style='color:#808030; '>(</span>line<span style='color:#808030; '>,</span> plane<span style='color:#808030; '>)</span>
+
+<span style='color:#696969; '>//==============================================================================//</span>
+<span style='color:#696969; '>// Flow Control</span>
+<span style='color:#696969; '>//==============================================================================//</span>
+
+<span style='color:#800000; font-weight:bold; '>if</span> a <span style='color:#800080; '>{</span>
+
+<span style='color:#800080; '>}</span>
+<span style='color:#800000; font-weight:bold; '>if</span><span style='color:#808030; '>(</span>a<span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
+
+<span style='color:#800080; '>}</span>
+<span style='color:#800000; font-weight:bold; '>else</span> <span style='color:#800000; font-weight:bold; '>if</span> b<span style='color:#800080; '>{</span>
+
+<span style='color:#800080; '>}</span>
+<span style='color:#800000; font-weight:bold; '>else</span><span style='color:#800080; '>{</span>
+
+<span style='color:#800080; '>}</span>
+
+<span style='color:#696969; '>//NOTE No break needed, use continue if you want the old non-break features</span>
+<span style='color:#800000; font-weight:bold; '>switch</span> a <span style='color:#800080; '>{</span>
+  <span style='color:#800000; font-weight:bold; '>case </span><span style='color:#008c00; '>0</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>3</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>4</span><span style='color:#7d0045; '>  </span><span style='color:#e34adc; '>:</span> print<span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#0000e6; '>Niet harry potter</span><span style='color:#800000; '>"</span><span style='color:#808030; '>)</span>
+  <span style='color:#800000; font-weight:bold; '>case </span><span style='color:#008c00; '>1</span><span style='color:#7d0045; '>          </span><span style='color:#e34adc; '>:</span> print<span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#0000e6; '>Harry potter</span><span style='color:#800000; '>"</span><span style='color:#808030; '>)</span>
+  <span style='color:#800000; font-weight:bold; '>default</span>         <span style='color:#800080; '>:</span> print<span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#0000e6; '>No sir.</span><span style='color:#800000; '>"</span><span style='color:#808030; '>)</span>
+<span style='color:#800080; '>}</span>
+
+<span style='color:#696969; '>//==============================================================================//</span>
+<span style='color:#696969; '>// Defer syntax</span>
+<span style='color:#696969; '>//==============================================================================//</span>
+
+function <span style='color:#400000; '>main</span><span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
+  print<span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#0000e6; '>1</span><span style='color:#800000; '>"</span><span style='color:#808030; '>)</span>
+
+  defer print<span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#0000e6; '>5</span><span style='color:#800000; '>"</span><span style='color:#808030; '>)</span>
+  defer print<span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#0000e6; '>4</span><span style='color:#800000; '>"</span><span style='color:#808030; '>)</span>
+  defer print<span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#0000e6; '>3</span><span style='color:#800000; '>"</span><span style='color:#808030; '>)</span>
+
+  print<span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#0000e6; '>2</span><span style='color:#800000; '>"</span><span style='color:#808030; '>)</span>
+<span style='color:#800080; '>}</span>
+
+<span style='color:#696969; '>//Prints</span>
+<span style='color:#696969; '>// 1</span>
+<span style='color:#696969; '>// 2</span>
+<span style='color:#696969; '>// 3</span>
+<span style='color:#696969; '>// 4</span>
+<span style='color:#696969; '>// 5</span>
+
+<span style='color:#696969; '>//==============================================================================//</span>
+<span style='color:#696969; '>// Symmetry</span>
+<span style='color:#696969; '>//==============================================================================//</span>
+
+<span style='color:#800000; font-weight:bold; '>class</span> Line<span style='color:#800080; '>{</span>
+  <span style='color:#696969; '>//...</span>
+<span style='color:#800080; '>}</span>
+<span style='color:#800000; font-weight:bold; '>class</span> Plane<span style='color:#800080; '>{</span>
+  <span style='color:#696969; '>// ...</span>
+<span style='color:#800080; '>}</span>
+
+symetric function intersects<span style='color:#808030; '>(</span>a <span style='color:#800080; '>:</span> Line<span style='color:#808030; '>,</span> b <span style='color:#800080; '>:</span> plane<span style='color:#808030; '>)</span> <span style='color:#800080; '>:</span> boolean <span style='color:#800080; '>{</span> <span style='color:#696969; '>/*...*/</span> <span style='color:#800080; '>}</span>
+
+var line <span style='color:#800080; '>:</span> Line
+var plane <span style='color:#800080; '>:</span> plane
+
+<span style='color:#800000; font-weight:bold; '>if</span><span style='color:#808030; '>(</span>intersects<span style='color:#808030; '>(</span>line<span style='color:#808030; '>,</span> plane<span style='color:#808030; '>)</span><span style='color:#808030; '>)</span> <span style='color:#800080; '>{</span><span style='color:#800080; '>}</span>
+<span style='color:#800000; font-weight:bold; '>if</span><span style='color:#808030; '>(</span>intersects<span style='color:#808030; '>(</span>plane<span style='color:#808030; '>,</span> line<span style='color:#808030; '>)</span><span style='color:#808030; '>)</span> <span style='color:#800080; '>{</span><span style='color:#800080; '>}</span>
+
+<span style='color:#696969; '>//==============================================================================//</span>
+<span style='color:#696969; '>// Dynamic functions</span>
+<span style='color:#696969; '>//==============================================================================//</span>
+
+<span style='color:#800000; font-weight:bold; '>class</span> GameObject<span style='color:#800080; '>{</span>
+  <span style='color:#696969; '>//...</span>
+<span style='color:#800080; '>}</span>
+<span style='color:#800000; font-weight:bold; '>class</span> Player extends GameObject<span style='color:#800080; '>{</span>
+  <span style='color:#696969; '>// ...</span>
+<span style='color:#800080; '>}</span>
+
+dynamic function compute<span style='color:#808030; '>(</span>player <span style='color:#800080; '>:</span> Player<span style='color:#808030; '>)</span>         <span style='color:#800080; '>{</span> console<span style='color:#808030; '>.</span>println<span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#0000e6; '>player compute</span><span style='color:#800000; '>"</span><span style='color:#808030; '>)</span> <span style='color:#800080; '>}</span>
+dynamic function compute<span style='color:#808030; '>(</span>gameObject <span style='color:#800080; '>:</span> GameObject<span style='color:#808030; '>)</span> <span style='color:#800080; '>{</span> console<span style='color:#808030; '>.</span>println<span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#0000e6; '>object compute</span><span style='color:#800000; '>"</span><span style='color:#808030; '>)</span> <span style='color:#800080; '>}</span>
+
+var object <span style='color:#800080; '>:</span> GameObject <span style='color:#808030; '>=</span> GameObject<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+var player <span style='color:#800080; '>:</span> GameObject <span style='color:#808030; '>=</span> Player<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+
+<span style='color:#696969; '>//With dynamic</span>
+compute<span style='color:#808030; '>(</span>player<span style='color:#808030; '>)</span> <span style='color:#696969; '>// player compute</span>
+compute<span style='color:#808030; '>(</span>object<span style='color:#808030; '>)</span> <span style='color:#696969; '>// object compute</span>
+
+<span style='color:#696969; '>//Without dynamic</span>
+compute<span style='color:#808030; '>(</span>player<span style='color:#808030; '>)</span> <span style='color:#696969; '>// object compute</span>
+compute<span style='color:#808030; '>(</span>object<span style='color:#808030; '>)</span> <span style='color:#696969; '>// object compute</span>
+
+
+
+<span style='color:#696969; '>//==============================================================================//</span>
+<span style='color:#696969; '>// Member functions</span>
+<span style='color:#696969; '>//==============================================================================//</span>
+
+<span style='color:#696969; '>//NOTE functions are automatically always virtual. This is to not confuse people</span>
+<span style='color:#800000; font-weight:bold; '>class</span> GameObject<span style='color:#800080; '>{</span>
+  function update<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span> <span style='color:#800080; '>{</span><span style='color:#800080; '>}</span>
+<span style='color:#800080; '>}</span>
+
+<span style='color:#800000; font-weight:bold; '>class</span> Player extends GameObject<span style='color:#800080; '>{</span>
+  function update<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span> <span style='color:#800080; '>{</span><span style='color:#800080; '>}</span>
+<span style='color:#800080; '>}</span>
+
+var player <span style='color:#800080; '>:</span> Player
+var gameObject <span style='color:#800080; '>:</span> GameObject
+
+player<span style='color:#808030; '>.</span>update<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+gameObject<span style='color:#808030; '>.</span>update<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+
+<span style='color:#696969; '>//==============================================================================//</span>
+<span style='color:#696969; '>// Maybe stuff</span>
+<span style='color:#696969; '>//==============================================================================//</span>
+
+<span style='color:#800000; font-weight:bold; '>class</span> A<span style='color:#800080; '>{</span>
+  function stuff<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>{</span><span style='color:#800080; '>}</span>
+<span style='color:#800080; '>}</span>
+
+function stuff<span style='color:#808030; '>(</span>i <span style='color:#800080; '>:</span> <span style='color:#800000; font-weight:bold; '>int</span><span style='color:#808030; '>)</span><span style='color:#800080; '>{</span><span style='color:#800080; '>}</span>
+
+var a <span style='color:#808030; '>=</span> A<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+var i <span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span>
+
+a<span style='color:#808030; '>.</span>stuff<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+stuff<span style='color:#808030; '>(</span>a<span style='color:#808030; '>)</span>
+
+stuff<span style='color:#808030; '>(</span>i<span style='color:#808030; '>)</span>
+i <span style='color:#808030; '>.</span>stuff<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span> <span style='color:#696969; '>//Wait, whaaaatt</span><span style='color:#ffffff; background:#808000; '>??</span>
+<span style='color:#008c00; '>4</span> <span style='color:#808030; '>.</span>stuff<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span> <span style='color:#696969; '>//Woaah (this is very shit to parse though)</span>
+
+<span style='color:#696969; '>//==============================================================================//</span>
+<span style='color:#696969; '>// Extensions</span>
+<span style='color:#696969; '>//==============================================================================//</span>
+
+extension <span style='color:#603000; '>String</span><span style='color:#800080; '>{</span>
+  function <span style='color:#603000; '>reverse</span><span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>{</span> <span style='color:#800080; '>}</span>
+<span style='color:#800080; '>}</span>
+
+var s <span style='color:#800080; '>:</span> <span style='color:#603000; '>String</span> <span style='color:#808030; '>=</span> <span style='color:#800000; '>"</span><span style='color:#0000e6; '>Hey!</span><span style='color:#800000; '>"</span>
+
+s<span style='color:#808030; '>.</span><span style='color:#603000; '>reverse</span><span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+
+<span style='color:#696969; '>//==============================================================================//</span>
+<span style='color:#696969; '>// Cross Referencing</span>
+<span style='color:#696969; '>//==============================================================================//</span>
+
+<span style='color:#696969; '>//Normal cross referencing</span>
+<span style='color:#800000; font-weight:bold; '>class</span> Node<span style='color:#800080; '>{</span>
+  var doc <span style='color:#800080; '>:</span> Document
+<span style='color:#800080; '>}</span>
+<span style='color:#800000; font-weight:bold; '>class</span> Document<span style='color:#800080; '>{</span>
+  var root <span style='color:#800080; '>:</span> Node
+<span style='color:#800080; '>}</span>
+
+<span style='color:#696969; '>//Agressive cross referencing</span>
+<span style='color:#800000; font-weight:bold; '>class</span> A <span style='color:#800080; '>{</span>
+  <span style='color:#800000; font-weight:bold; '>static</span> var instance <span style='color:#808030; '>=</span> A<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+  <span style='color:#800000; font-weight:bold; '>static</span> var p <span style='color:#808030; '>=</span> B<span style='color:#808030; '>.</span>p<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+<span style='color:#800080; '>}</span>
+<span style='color:#800000; font-weight:bold; '>class</span> B <span style='color:#800080; '>{</span>
+  <span style='color:#800000; font-weight:bold; '>static</span> function p<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span> <span style='color:#800080; '>:</span> A <span style='color:#800080; '>{</span> <span style='color:#800000; font-weight:bold; '>return</span> C<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>.</span>a <span style='color:#800080; '>}</span>
+<span style='color:#800080; '>}</span>
+<span style='color:#800000; font-weight:bold; '>class</span> C <span style='color:#800080; '>{</span>
+  var a <span style='color:#808030; '>=</span> A<span style='color:#808030; '>.</span>instance
+<span style='color:#800080; '>}</span>
+</pre>
+  </body>
+</html>
